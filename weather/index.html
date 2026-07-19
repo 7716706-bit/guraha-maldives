@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard | GurahaMaldives</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="weather.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="loader" id="loader">
+        <div class="laser-beam"></div>
+        <div class="loader-text">WEATHER<span>DASHBOARD</span></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="../index.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary);">
+                <i class="fas fa-cloud-sun"></i>
+                <span>Weather Dashboard</span>
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#weather" class="active"><i class="fas fa-cloud-sun"></i> Weather</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <main class="weather-main">
+        <!-- Search Section -->
+        <section class="weather-section search-section">
+            <div class="section-header">
+                <h2><i class="fas fa-cloud-sun"></i> Real-Time Weather Dashboard</h2>
+                <p>Get accurate weather information for any location worldwide</p>
+            </div>
+
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search city name..." autocomplete="off">
+                    <button id="searchBtn" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    <button id="geoBtn" class="btn btn-secondary" title="Use Current Location"><i class="fas fa-map-marker-alt"></i></button>
+                </div>
+                <div id="suggestions" class="suggestions-list" style="display: none;"></div>
+            </div>
+
+            <!-- Temperature Unit Toggle -->
+            <div class="unit-toggle">
+                <label>
+                    <input type="radio" name="tempUnit" value="metric" checked>
+                    <span>°C</span>
+                </label>
+                <label>
+                    <input type="radio" name="tempUnit" value="imperial">
+                    <span>°F</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- Current Weather -->
+        <section class="weather-section current-weather" id="currentWeather" style="display: none;">
+            <div class="current-header">
+                <div class="location-info">
+                    <h3 id="currentLocation"></h3>
+                    <p id="currentDate" class="date-time"></p>
+                </div>
+                <div class="weather-controls">
+                    <button id="favBtn" class="btn btn-secondary" title="Add to Favorites"><i class="far fa-heart"></i></button>
+                    <button id="shareBtn" class="btn btn-secondary" title="Share Weather"><i class="fas fa-share-alt"></i></button>
+                </div>
+            </div>
+
+            <div class="current-main">
+                <div class="weather-display">
+                    <div class="temp-container">
+                        <img id="weatherIcon" src="" alt="Weather" class="weather-icon">
+                        <div class="temp-info">
+                            <div class="temperature" id="currentTemp"></div>
+                            <div class="weather-desc" id="weatherDesc"></div>
+                            <div class="feels-like" id="feelsLike"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="weather-details">
+                    <div class="detail-card">
+                        <i class="fas fa-droplets"></i>
+                        <div>
+                            <p class="detail-label">Humidity</p>
+                            <p class="detail-value" id="humidity"></p>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fas fa-wind"></i>
+                        <div>
+                            <p class="detail-label">Wind Speed</p>
+                            <p class="detail-value" id="windSpeed"></p>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fas fa-eye"></i>
+                        <div>
+                            <p class="detail-label">Visibility</p>
+                            <p class="detail-value" id="visibility"></p>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fas fa-compress"></i>
+                        <div>
+                            <p class="detail-label">Pressure</p>
+                            <p class="detail-value" id="pressure"></p>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fas fa-gauge"></i>
+                        <div>
+                            <p class="detail-label">UV Index</p>
+                            <p class="detail-value" id="uvIndex"></p>
+                        </div>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fas fa-tint"></i>
+                        <div>
+                            <p class="detail-label">Dew Point</p>
+                            <p class="detail-value" id="dewPoint"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hourly Forecast -->
+        <section class="weather-section hourly-forecast" id="hourlySection" style="display: none;">
+            <h3><i class="fas fa-clock"></i> Hourly Forecast</h3>
+            <div class="hourly-container" id="hourlyForecast"></div>
+        </section>
+
+        <!-- 5-Day Forecast -->
+        <section class="weather-section daily-forecast" id="dailySection" style="display: none;">
+            <h3><i class="fas fa-calendar"></i> 5-Day Forecast</h3>
+            <div class="daily-container" id="dailyForecast"></div>
+        </section>
+
+        <!-- Air Quality -->
+        <section class="weather-section air-quality" id="airQualitySection" style="display: none;">
+            <h3><i class="fas fa-wind"></i> Air Quality Index</h3>
+            <div class="aq-container">
+                <div class="aq-display">
+                    <div class="aq-index" id="aqIndex"></div>
+                    <div class="aq-label" id="aqLabel"></div>
+                </div>
+                <div class="aq-details" id="aqDetails"></div>
+            </div>
+        </section>
+
+        <!-- Alerts -->
+        <section id="alertsSection" class="weather-section alerts" style="display: none;">
+            <h3><i class="fas fa-exclamation-triangle"></i> Weather Alerts</h3>
+            <div id="alertsList" class="alerts-list"></div>
+        </section>
+
+        <!-- Favorites -->
+        <section class="weather-section favorites" id="favoritesSection" style="display: none;">
+            <h3><i class="fas fa-heart"></i> Favorite Locations</h3>
+            <div class="favorites-grid" id="favoritesList"></div>
+        </section>
+
+        <!-- Error Message -->
+        <div id="errorMsg" class="error-message" style="display: none;"></div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>Weather Data powered by OpenWeatherMap API</p>
+            <p>&copy; 2024 GurahaMaldives - Weather Dashboard</p>
+        </div>
+    </footer>
+
+    <script src="weather.js"></script>
+</body>
+</html>
