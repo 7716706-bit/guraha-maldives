@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GurahaMaldives - CO2 Laser Design Studio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="loader" id="loader">
+        <div class="laser-beam"></div>
+        <div class="loader-text">GURAHA<span>MALDIVES</span></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="assets/logo.svg" alt="GurahaMaldives" class="logo-img">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home" class="active" data-section="home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#converter" data-section="converter"><i class="fas fa-exchange-alt"></i> Image to Vector</a></li>
+            <li><a href="#boxmaker" data-section="boxmaker"><i class="fas fa-box"></i> Box Maker</a></li>
+            <li><a href="#lineart" data-section="lineart"><i class="fas fa-pen-nib"></i> Line Art</a></li>
+            <li><a href="#clipart" data-section="clipart"><i class="fas fa-search"></i> Clip Art</a></li>
+            <li><a href="#trophies" data-section="trophies"><i class="fas fa-trophy"></i> Trophies</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <main>
+        <!-- HOME SECTION -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1 class="glitch" data-text="CO2 LASER DESIGN STUDIO">CO2 LASER DESIGN STUDIO</h1>
+                    <p class="hero-subtitle">Transform images into laser-ready designs</p>
+                    <div class="hero-features">
+                        <div class="feature-card" data-goto="converter">
+                            <i class="fas fa-vector-square"></i>
+                            <h3>Image to Vector</h3>
+                            <p>Convert any image to SVG</p>
+                        </div>
+                        <div class="feature-card" data-goto="boxmaker">
+                            <i class="fas fa-cube"></i>
+                            <h3>Box Maker</h3>
+                            <p>Design custom boxes</p>
+                        </div>
+                        <div class="feature-card" data-goto="lineart">
+                            <i class="fas fa-draw-polygon"></i>
+                            <h3>Line Art</h3>
+                            <p>Create laser engravings</p>
+                        </div>
+                        <div class="feature-card" data-goto="clipart">
+                            <i class="fas fa-shapes"></i>
+                            <h3>Clip Art</h3>
+                            <p>Browse design library</p>
+                        </div>
+                        <div class="feature-card" data-goto="trophies">
+                            <i class="fas fa-award"></i>
+                            <h3>Trophies</h3>
+                            <p>Design awards & plaques</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="laser-animation">
+                    <svg viewBox="0 0 400 300" class="laser-svg">
+                        <path class="laser-path" d="M50,150 Q100,50 200,150 T350,150" fill="none" stroke="#ff3333" stroke-width="2"/>
+                        <circle class="laser-dot" cx="50" cy="150" r="4" fill="#ff3333"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- IMAGE TO VECTOR CONVERTER -->
+        <section id="converter" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-exchange-alt"></i> Image to Vector Converter</h2>
+                <p>Upload an image and convert it to laser-ready SVG format</p>
+            </div>
+            <div class="converter-container">
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="imageInput" accept="image/*" hidden>
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag & Drop Image Here</p>
+                        <span>or click to browse</span>
+                        <button class="btn btn-primary" onclick="document.getElementById('imageInput').click()">
+                            <i class="fas fa-upload"></i> Select Image
+                        </button>
+                    </div>
+                </div>
+                <div class="converter-preview" id="converterPreview" style="display:none;">
+                    <div class="preview-box">
+                        <h3>Original Image</h3>
+                        <div class="image-container">
+                            <img id="originalImage" src="" alt="Original">
+                        </div>
+                    </div>
+                    <div class="preview-controls">
+                        <div class="control-group">
+                            <label>Conversion Mode</label>
+                            <select id="conversionMode">
+                                <option value="outline">Outline / Edge Detection</option>
+                                <option value="fill">Filled Shapes</option>
+                                <option value="detailed">Detailed Trace</option>
+                                <option value="silhouette">Silhouette</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>Detail Level: <span id="detailValue">50</span>%</label>
+                            <input type="range" id="detailLevel" min="1" max="100" value="50">
+                        </div>
+                        <div class="control-group">
+                            <label>Simplify Paths: <span id="simplifyValue">30</span>%</label>
+                            <input type="range" id="simplifyLevel" min="0" max="100" value="30">
+                        </div>
+                        <div class="control-group">
+                            <label>Stroke Width: <span id="strokeValue">1</span>px</label>
+                            <input type="range" id="strokeWidth" min="0.5" max="5" step="0.5" value="1">
+                        </div>
+                        <div class="control-group">
+                            <label>Colors</label>
+                            <select id="colorMode">
+                                <option value="bw">Black & White</option>
+                                <option value="grayscale">Grayscale</option>
+                                <option value="color">Preserve Colors</option>
+                            </select>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn btn-primary" id="convertBtn">
+                                <i class="fas fa-magic"></i> Convert to Vector
+                            </button>
+                            <button class="btn btn-secondary" id="resetConverter">
+                                <i class="fas fa-redo"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="vector-result" id="vectorResult" style="display:none;">
+                    <div class="result-header">
+                        <h3>Vector Result</h3>
+                        <div class="stats" id="vectorStats"></div>
+                    </div>
+                    <div class="svg-container" id="svgOutput"></div>
+                    <div class="export-options">
+                        <button class="btn btn-success" id="downloadSVG">
+                            <i class="fas fa-download"></i> Download SVG
+                        </button>
+                        <button class="btn btn-success" id="downloadDXF">
+                            <i class="fas fa-file-download"></i> Download DXF
+                        </button>
+                        <button class="btn btn-info" id="copySVG">
+                            <i class="fas fa-copy"></i> Copy SVG Code
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BOX MAKER -->
+        <section id="boxmaker" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-box"></i> Box Maker</h2>
+                <p>Design custom laser-cut boxes with finger joints</p>
+            </div>
+            <div class="boxmaker-container">
+                <div class="box-settings">
+                    <h3>Box Dimensions</h3>
+                    <div class="settings-grid">
+                        <div class="control-group">
+                            <label>Width (mm)</label>
+                            <input type="number" id="boxWidth" value="100" min="10" max="500">
+                        </div>
+                        <div class="control-group">
+                            <label>Height (mm)</label>
+                            <input type="number" id="boxHeight" value="80" min="10" max="500">
+                        </div>
+                        <div class="control-group">
+                            <label>Depth (mm)</label>
+                            <input type="number" id="boxDepth" value="60" min="10" max="500">
+                        </div>
+                        <div class="control-group">
+                            <label>Material Thickness (mm)</label>
+                            <input type="number" id="materialThickness" value="3" min="1" max="12" step="0.5">
+                        </div>
+                        <div class="control-group">
+                            <label>Finger Joint Size (mm)</label>
+                            <input type="number" id="jointSize" value="10" min="5" max="30">
+                        </div>
+                        <div class="control-group">
+                            <label>Kerf Compensation (mm)</label>
+                            <input type="number" id="kerf" value="0.1" min="0" max="0.5" step="0.05">
+                        </div>
+                        <div class="control-group">
+                            <label>Box Type</label>
+                            <select id="boxType">
+                                <option value="open-top">Open Top</option>
+                                <option value="closed">Closed (6 sides)</option>
+                                <option value="drawer">Drawer Style</option>
+                                <option value="divided">With Dividers</option>
+                                <option value="hexagonal">Hexagonal</option>
+                            </select>
+                        </div>
+                        <div class="control-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="addEngraving"> Add Engraving Area
+                            </label>
+                        </div>
+                    </div>
+                    <div class="engraving-settings" id="engravingSettings" style="display:none;">
+                        <h4>Engraving Options</h4>
+                        <div class="control-group">
+                            <label>Engraving Text</label>
+                            <input type="text" id="engravingText" placeholder="Enter text to engrave">
+                        </div>
+                        <div class="control-group">
+                            <label>Font Size (mm)</label>
+                            <input type="number" id="engravingSize" value="8" min="4" max="50">
+                        </div>
+                        <div class="control-group">
+                            <label>Position</label>
+                            <select id="engravingPosition">
+                                <option value="front">Front Panel</option>
+                                <option value="top">Top Panel</option>
+                                <option value="all-sides">All Sides</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-full" id="generateBox">
+                        <i class="fas fa-cogs"></i> Generate Box Layout
+                    </button>
+                </div>
+                <div class="box-preview">
+                    <h3>Box Preview</h3>
+                    <div class="preview-3d" id="boxPreview3D">
+                        <canvas id="boxCanvas3D"></canvas>
+                    </div>
+                    <div class="preview-2d" id="boxPreview2D">
+                        <svg id="boxSVG" viewBox="0 0 800 600"></svg>
+                    </div>
+                    <div class="preview-tabs">
+                        <button class="tab-btn active" data-tab="2d">2D Layout</button>
+                        <button class="tab-btn" data-tab="3d">3D Preview</button>
+                    </div>
+                </div>
+                <div class="box-export">
+                    <button class="btn btn-success" id="downloadBoxSVG">
+                        <i class="fas fa-download"></i> Download SVG
+                    </button>
+                    <button class="btn btn-success" id="downloadBoxDXF">
+                        <i class="fas fa-file-download"></i> Download DXF
+                    </button>
+                    <button class="btn btn-info" id="printLayout">
+                        <i class="fas fa-print"></i> Print Layout
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- LINE ART -->
+        <section id="lineart" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-pen-nib"></i> Line Art Generator</h2>
+                <p>Transform photos into stunning line art for laser engraving</p>
+            </div>
+            <div class="lineart-container">
+                <div class="lineart-upload">
+                    <div class="upload-area" id="lineartUploadArea">
+                        <input type="file" id="lineartInput" accept="image/*" hidden>
+                        <div class="upload-content">
+                            <i class="fas fa-image"></i>
+                            <p>Upload Image for Line Art</p>
+                            <button class="btn btn-primary" onclick="document.getElementById('lineartInput').click()">
+                                <i class="fas fa-upload"></i> Select Image
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="lineart-editor" id="lineartEditor" style="display:none;">
+                    <div class="editor-toolbar">
+                        <div class="tool-group">
+                            <button class="tool-btn active" data-effect="pencil" title="Pencil Sketch">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+                            <button class="tool-btn" data-effect="hatch" title="Cross Hatch">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="tool-btn" data-effect="stipple" title="Stipple dots">
+                                <i class="fas fa-braille"></i>
+                            </button>
+                            <button class="tool-btn" data-effect="woodburn" title="Wood Burn Effect">
+                                <i class="fas fa-fire"></i>
+                            </button>
+                            <button class="tool-btn" data-effect="contour" title="Contour Lines">
+                                <i class="fas fa-bezier-curve"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="editor-main">
+                        <div class="editor-preview">
+                            <img id="lineartSource" src="" alt="Source">
+                            <canvas id="lineartCanvas" style="display:none;"></canvas>
+                        </div>
+                        <div class="editor-controls">
+                            <div class="control-group">
+                                <label>Line Density: <span id="densityValue">50</span></label>
+                                <input type="range" id="lineDensity" min="1" max="100" value="50">
+                            </div>
+                            <div class="control-group">
+                                <label>Contrast: <span id="contrastValue">50</span></label>
+                                <input type="range" id="lineContrast" min="1" max="100" value="50">
+                            </div>
+                            <div class="control-group">
+                                <label>Brightness: <span id="brightnessValue">0</span></label>
+                                <input type="range" id="lineBrightness" min="-100" max="100" value="0">
+                            </div>
+                            <div class="control-group">
+                                <label>Invert Colors</label>
+                                <label class="switch">
+                                    <input type="checkbox" id="invertColors">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="control-group">
+                                <label>Line Thickness: <span id="thicknessValue">1</span>px</label>
+                                <input type="range" id="lineThickness" min="1" max="5" value="1">
+                            </div>
+                            <div class="control-group">
+                                <label>Output Size</label>
+                                <select id="outputSize">
+                                    <option value="a4">A4 (210x297mm)</option>
+                                    <option value="a3">A3 (297x420mm)</option>
+                                    <option value="custom">Custom</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary btn-full" id="generateLineArt">
+                                <i class="fas fa-magic"></i> Generate Line Art
+                            </button>
+                        </div>
+                    </div>
+                    <div class="lineart-result" id="lineartResult" style="display:none;">
+                        <h3>Line Art Result</h3>
+                        <div class="result-preview" id="lineartOutput"></div>
+                        <div class="export-options">
+                            <button class="btn btn-success" id="downloadLineArt">
+                                <i class="fas fa-download"></i> Download SVG
+                            </button>
+                            <button class="btn btn-success" id="downloadLineArtPNG">
+                                <i class="fas fa-image"></i> Download PNG
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLIP ART -->
+        <section id="clipart" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-search"></i> Clip Art Library</h2>
+                <p>Browse and download laser-ready vector designs</p>
+            </div>
+            <div class="clipart-container">
+                <div class="clipart-sidebar">
+                    <div class="search-box">
+                        <input type="text" id="clipartSearch" placeholder="Search clip art...">
+                        <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="categories">
+                        <h3>Categories</h3>
+                        <ul class="category-list">
+                            <li class="active" data-category="all"><i class="fas fa-th"></i> All Designs</li>
+                            <li data-category="animals"><i class="fas fa-paw"></i> Animals</li>
+                            <li data-category="nature"><i class="fas fa-leaf"></i> Nature</li>
+                            <li data-category="geometric"><i class="fas fa-shapes"></i> Geometric</li>
+                            <li data-category="holidays"><i class="fas fa-gift"></i> Holidays</li>
+                            <li data-category="logos"><i class="fas fa-copyright"></i> Logos & Symbols</li>
+                            <li data-category="patterns"><i class="fas fa-border-all"></i> Patterns</li>
+                            <li data-category="frames"><i class="fas fa-frame"></i> Frames & Borders</li>
+                            <li data-category="text"><i class="fas fa-font"></i> Text & Quotes</li>
+                        </ul>
+                    </div>
+                    <div class="filter-options">
+                        <h3>Filter</h3>
+                        <div class="control-group">
+                            <label>Complexity</label>
+                            <select id="complexityFilter">
+                                <option value="all">All</option>
+                                <option value="simple">Simple</option>
+                                <option value="medium">Medium</option>
+                                <option value="complex">Complex</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>Style</label>
+                            <select id="styleFilter">
+                                <option value="all">All</option>
+                                <option value="outline">Outline</option>
+                                <option value="filled">Filled</option>
+                                <option value="detailed">Detailed</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="clipart-gallery" id="clipartGallery">
+                    <!-- Clip art items will be generated by JS -->
+                </div>
+            </div>
+            <div class="clipart-modal" id="clipartModal" style="display:none;">
+                <div class="modal-content">
+                    <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
+                    <div class="modal-preview" id="modalPreview"></div>
+                    <div class="modal-info">
+                        <h3 id="modalTitle">Design Name</h3>
+                        <p id="modalCategory">Category</p>
+                        <div class="modal-actions">
+                            <button class="btn btn-success" id="downloadClipart">
+                                <i class="fas fa-download"></i> Download SVG
+                            </button>
+                            <button class="btn btn-info" id="addToCollection">
+                                <i class="fas fa-plus"></i> Add to Collection
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TROPHIES -->
+        <section id="trophies" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-trophy"></i> Trophy & Award Designer</h2>
+                <p>Create custom trophies, plaques, and awards</p>
+            </div>
+            <div class="trophies-container">
+                <div class="trophy-templates">
+                    <h3>Choose Template</h3>
+                    <div class="template-grid" id="trophyTemplates">
+                        <!-- Templates will be generated by JS -->
+                    </div>
+                </div>
+                <div class="trophy-editor" id="trophyEditor" style="display:none;">
+                    <div class="editor-sidebar">
+                        <h3>Customize</h3>
+                        <div class="control-group">
+                            <label>Trophy Type</label>
+                            <select id="trophyType">
+                                <option value="plaque">Wall Plaque</option>
+                                <option value="standing">Standing Trophy</option>
+                                <option value="crystal">Crystal Award</option>
+                                <option value="wood">Wooden Trophy</option>
+                                <option value="acrylic">Acrylic Award</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>Size</label>
+                            <select id="trophySize">
+                                <option value="small">Small (100x150mm)</option>
+                                <option value="medium">Medium (150x200mm)</option>
+                                <option value="large">Large (200x300mm)</option>
+                                <option value="custom">Custom Size</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>Material</label>
+                            <select id="trophyMaterial">
+                                <option value="wood">Wood (3mm)</option>
+                                <option value="wood6">Wood (6mm)</option>
+                                <option value="acrylic">Acrylic (3mm)</option>
+                                <option value="acrylic5">Acrylic (5mm)</option>
+                                <option value="bamboo">Bamboo</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>Title Text</label>
+                            <input type="text" id="trophyTitle" placeholder="Award Title">
+                        </div>
+                        <div class="control-group">
+                            <label>Recipient Name</label>
+                            <input type="text" id="trophyName" placeholder="Name">
+                        </div>
+                        <div class="control-group">
+                            <label>Date</label>
+                            <input type="date" id="trophyDate">
+                        </div>
+                        <div class="control-group">
+                            <label>Description / Message</label>
+                            <textarea id="trophyMessage" placeholder="Enter message or description" rows="3"></textarea>
+                        </div>
+                        <div class="control-group">
+                            <label>Add Logo/Image</label>
+                            <button class="btn btn-secondary btn-full" id="addTrophyImage">
+                                <i class="fas fa-image"></i> Upload Logo
+                            </button>
+                            <input type="file" id="trophyImageInput" accept="image/*" hidden>
+                        </div>
+                        <div class="control-group">
+                            <label>Border Style</label>
+                            <select id="borderStyle">
+                                <option value="simple">Simple Line</option>
+                                <option value="ornate">Ornate</option>
+                                <option value="rope">Rope Border</option>
+                                <option value="none">No Border</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>Decoration</label>
+                            <select id="decoration">
+                                <option value="stars">Stars</option>
+                                <option value="laurel">Laurel Wreath</option>
+                                <option value="ribbon">Ribbon</option>
+                                <option value="shield">Shield</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="editor-main">
+                        <div class="trophy-preview" id="trophyPreviewArea">
+                            <svg id="trophySVG" viewBox="0 0 400 500"></svg>
+                        </div>
+                        <div class="export-options">
+                            <button class="btn btn-success" id="downloadTrophy">
+                                <i class="fas fa-download"></i> Download SVG
+                            </button>
+                            <button class="btn btn-success" id="downloadTrophyDXF">
+                                <i class="fas fa-file-download"></i> Download DXF
+                            </button>
+                            <button class="btn btn-info" id="printTrophy">
+                                <i class="fas fa-print"></i> Print
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="assets/logo.svg" alt="GurahaMaldives" class="footer-logo-img">
+            </div>
+            <p>Professional CO2 Laser Design Studio</p>
+            <div class="footer-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
